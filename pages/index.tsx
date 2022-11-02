@@ -8,10 +8,7 @@ import styles from "../styles/Home.module.css";
 // It will be transformed at build time to `setupAnalyticsService('abcdefghijk')`.
 
 export default function Home() {
-  useEffect(() => {
-    console.log("process.env Browser");
-    console.log(process.env.NEXT_PUBLIC_DB_PASS);
-  }, []);
+  useEffect(() => {}, []);
   return (
     <div className={styles.container}>
       <Head>
@@ -21,14 +18,15 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>123456</h1>
+        <h1 className={styles.title}>{process.env.NEXT_PUBLIC_ENV}</h1>
       </main>
     </div>
   );
 }
 
 export async function getServerSideProps() {
-  console.log(process.env);
+  console.log("getServerSideProps");
+  console.log(process.env.NODE_ENV);
   return {
     props: {}, // will be passed to the page component as props
   };
