@@ -1,0 +1,13 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "051972272913.dkr.ecr.ap-northeast-2.amazonaws.com/payment-api:v1.3",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": 3000,
+      "HostPort": 80
+    }
+  ]
+}
