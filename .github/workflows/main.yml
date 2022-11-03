@@ -26,10 +26,12 @@ jobs:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           REPOSITORY: front-test
           IMAGE_TAG: ${{ github.sha }}
+          IMAGE_REPO: 051972272913.dkr.ecr.ap-northeast-2.amazonaws.com/front-test
+
         run: |
           docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
-          sh script/setDepolyInfo.sh $IMAGE_TAG
+          sh script/setDepolyInfo.sh $IMAGE_REPO:$IMAGE_TAG
 
       - name: Build Number
         id: build-number
