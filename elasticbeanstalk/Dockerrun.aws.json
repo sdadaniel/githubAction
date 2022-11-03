@@ -1,8 +1,8 @@
 {
-  "AWSEBDockerrunVersion": "1",
+  "AWSEBDockerrunVersion": 1,
   "Image": {
-    "Name": "051972272913.dkr.ecr.ap-northeast-2.amazonaws.com/front-test:633e45bc217ec22b865db4cc9f4e47749fd8831e",
-    "Update": "true"
+    "Name": "asdfhhhhh",
+    "Update": true
   },
   "Ports": [
     {
@@ -11,3 +11,4 @@
     }
   ]
 }
+

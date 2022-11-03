@@ -18,7 +18,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>{process.env.NEXT_PUBLIC_ENV}</h1>
+        <h1 className={styles.title}>{process.env.NEXT_PUBLIC_ENV} 배포성공</h1>
       </main>
     </div>
   );
