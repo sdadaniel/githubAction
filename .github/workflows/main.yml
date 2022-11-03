@@ -34,10 +34,6 @@ jobs:
           echo $IMAGE_REPO:$IMAGE_TAG
           sh script/setDepolyInfo.sh $IMAGE_REPO:$IMAGE_TAG
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
       - name: Build Number
         id: build-number
         run: echo "BUILD_NUMBER=$(date '+%Y-%m-%d-%H:%M')" >> $GITHUB_OUTPUT
