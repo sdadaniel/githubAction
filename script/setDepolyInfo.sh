@@ -4,7 +4,7 @@ mkdir -p elasticbeanstalk
 touch elasticbeanstalk/Dockerrun.aws.json
 
 echo "{
-  \"AWSEBDockerrunVersion\": "1",
+  \"AWSEBDockerrunVersion\": \"1\",
   \"Image\": {
     \"Name\": \"$1\",
     \"Update\": \"true\"
