@@ -1,7 +1,7 @@
 #!/bin/bash
-
 echo "make Json File"
-touch ./elasticbeanstalk/Dockerrun.aws.json
+mkdir -p elasticbeanstalk
+touch elasticbeanstalk/Dockerrun.aws.json
 
 echo "{
   \"AWSEBDockerrunVersion\": "1",
@@ -16,4 +16,4 @@ echo "{
     }
   ]
 }
-" > ./elasticbeanstalk/Dockerrun.aws.json
+" > elasticbeanstalk/Dockerrun.aws.json

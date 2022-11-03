@@ -9,39 +9,41 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
+        run: sh ../../script/setDepolyInfo.sh $IMAGE_TAG
+        run: cat ../../elasticbeanstalk/Dockerrun.aws.json
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-northeast-2
+      # - name: Configure AWS Credentials
+      #   uses: aws-actions/configure-aws-credentials@v1
+      #   with:
+      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     aws-region: ap-northeast-2
 
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
+      # - name: Login to Amazon ECR
+      #   id: login-ecr
+      #   uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Build, tag, and push docker image to Amazon ECR
-        env:
-          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          REPOSITORY: front-test
-          IMAGE_TAG: ${{ github.sha }}
-        run: |
-          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
-          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
-          sh ../../script/setDepolyInfo.sh $IMAGE_TAG
+      # - name: Build, tag, and push docker image to Amazon ECR
+      #   env:
+      #     REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+      #     REPOSITORY: front-test
+      #     IMAGE_TAG: ${{ github.sha }}
+      #   run: |
+      #     docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+      #     docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+      #     sh ../../script/setDepolyInfo.sh $IMAGE_TAG
 
-      - name: Build Number
-        id: build-number
-        run: echo "BUILD_NUMBER=$(date '+%Y-%m-%d-%H:%M')" >> $GITHUB_OUTPUT
+      # - name: Build Number
+      #   id: build-number
+      #   run: echo "BUILD_NUMBER=$(date '+%Y-%m-%d-%H:%M')" >> $GITHUB_OUTPUT
 
-      - name: Deploy to EB
-        uses: einaregilsson/beanstalk-deploy@v20
-        with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: test-front
-          environment_name: Testfront-env
-          version_label: ${{ steps.build-number.outputs.BUILD_NUMBER }}
-          region: ap-northeast-2
-          deployment_package: elasticbeanstalk/Dockerrun.aws.json
+      # - name: Deploy to EB
+      #   uses: einaregilsson/beanstalk-deploy@v20
+      #   with:
+      #     aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     application_name: test-front
+      #     environment_name: Testfront-env
+      #     version_label: ${{ steps.build-number.outputs.BUILD_NUMBER }}
+      #     region: ap-northeast-2
+      #     deployment_package: elasticbeanstalk/Dockerrun.aws.json
