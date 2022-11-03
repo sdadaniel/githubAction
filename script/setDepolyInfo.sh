@@ -7,7 +7,7 @@ echo "{
   \"AWSEBDockerrunVersion\": "1",
   \"Image\": {
     \"Name\": \"$1\",
-    \"Update\": "true"
+    \"Update\": \"true\"
   },
   \"Ports\": [
     {
