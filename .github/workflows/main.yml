@@ -29,6 +29,7 @@ jobs:
         run: |
           docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+          sh ../../script/setDepolyInfo.sh $IMAGE_TAG
 
       - name: Build Number
         id: build-number
@@ -44,4 +45,3 @@ jobs:
           version_label: ${{ steps.build-number.outputs.BUILD_NUMBER }}
           region: ap-northeast-2
           deployment_package: elasticbeanstalk/Dockerrun.aws.json
-# sh ../script/setDepolyInfo.sh $IMAGE_TAG
