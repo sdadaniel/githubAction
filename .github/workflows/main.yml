@@ -32,10 +32,10 @@ jobs:
         #     docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
         #     docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
         #     sh script/setDepolyInfo.sh $IMAGE_REPO:$IMAGE_TAG
-
-      - name: Build Number
-        id: build-number
-        run: echo "BUILD_NUMBER=$(date '+%Y-%m-%d-%H:%M')" >> $GITHUB_OUTPUT
+      # - name: Build Number
+      #   id: build-number
+      #   run: echo "BUILD_NUMBER=$(date '+%Y-%m-%d-%H:%M')" >> $GITHUB_OUTPUT
+      #   run: echo $(date '+%Y-%m-%d-%H:%M')
 
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v20
@@ -44,6 +44,6 @@ jobs:
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: test-front
           environment_name: Testfront-env
-          version_label: ${{ steps.build-number.outputs.BUILD_NUMBER }}
+          version_label: ${{ github.sha }}
           region: ap-northeast-2
           deployment_package: elasticbeanstalk/Dockerrun.aws.json
