@@ -13,6 +13,7 @@ jobs:
       - run: bats -v
 
   another-job:
+    needs: check-bats-version
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
